@@ -22,6 +22,5 @@ public class ServletNewMatch extends HttpServlet {
         String name = req.getParameter("usernameOne");
         String name2 = req.getParameter("usernameTwo");
 
-
     }
 }
