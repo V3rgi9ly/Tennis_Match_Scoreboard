@@ -1,16 +1,15 @@
 package repository;
 
-import model.Players;
 import org.hibernate.Session;
+import util.ConfigurationData;
 import util.HibernateUtil;
-
-import java.util.List;
 
 public class PlayersDAO {
 
     HibernateUtil configHibernate = HibernateUtil.getInstance();
+    ConfigurationData configurationData=ConfigurationData.getInstance();
 
-    public void findPlayers(Players nameOne, Players nameTwo) {
+    public void findPlayers(String nameOne, String nameTwo) {
 
 
         Session session = configHibernate.configurationHibernate().openSession();
@@ -25,6 +24,11 @@ public class PlayersDAO {
             session.close();
             configHibernate.configurationHibernate().close();
         }
+
+    }
+
+
+    public void addCurrentMathes(){
 
     }
 
