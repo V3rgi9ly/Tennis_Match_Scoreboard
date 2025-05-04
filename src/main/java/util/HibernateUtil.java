@@ -1,5 +1,6 @@
 package util;
 
+import model.Matches;
 import model.Players;
 import model.PlayersCurrentMathes;
 import org.hibernate.SessionFactory;
@@ -27,7 +28,7 @@ public class HibernateUtil {
 
     public SessionFactory configurationHibernate() {
         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-        Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
+        Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(Players.class).addAnnotatedClass(Matches.class).getMetadataBuilder().build();
         SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
         return sessionFactory;
     }

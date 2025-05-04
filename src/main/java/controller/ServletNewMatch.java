@@ -1,6 +1,7 @@
 package controller;
 
 
+import dto.PlayersCurrentMatchesDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,7 +32,7 @@ public class ServletNewMatch extends HttpServlet {
         if (playersService.findPlayer(name, name2)) {
             resp.sendRedirect(req.getContextPath() + "/new-match");
         }else {
-            servicesStoringCurrentMatches.createCurrentMatch();
+            PlayersCurrentMatchesDTO playersCurrentMatchesDTO=servicesStoringCurrentMatches.createCurrentMatch(name, name2);
         }
 
     }
