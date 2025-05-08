@@ -2,15 +2,11 @@ package util;
 
 import model.Matches;
 import model.Players;
-import model.PlayersCurrentMathes;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
-import java.util.HashMap;
-import java.util.UUID;
 
 public class HibernateUtil {
 

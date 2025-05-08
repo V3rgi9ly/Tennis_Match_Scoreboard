@@ -2,20 +2,35 @@ package model;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "PLAYERS")
-@NoArgsConstructor
 public class Players {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Column(name = "NAME")
     private String name;
@@ -24,11 +39,4 @@ public class Players {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Players{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

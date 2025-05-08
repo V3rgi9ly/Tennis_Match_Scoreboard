@@ -2,12 +2,13 @@ package model;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Getter @Setter
+@Data
 @Entity
 @Table(name="MATCHES")
 @NoArgsConstructor
@@ -16,7 +17,6 @@ public class Matches {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
 
     @OneToOne( cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
@@ -38,20 +38,4 @@ public class Matches {
     })
     @JoinColumn(name = "WINNER")
     private Players winner;
-
-
-    public Matches(Players player1, Players player2) {
-        this.player1 = player1;
-        this.player2 = player2;
-    }
-
-    @Override
-    public String toString() {
-        return "Matches{" +
-                "id=" + id +
-                ", player1=" + player1 +
-                ", player2=" + player2 +
-                ", winner=" + winner +
-                '}';
-    }
 }

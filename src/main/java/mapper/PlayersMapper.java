@@ -1,19 +1,21 @@
 package mapper;
 
-import dto.PlayersCurrentMatchesDTO;
+import dto.MatchDTO;
 import dto.PlayersDTO;
+import model.Match;
 import model.Players;
-import model.PlayersCurrentMathes;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper
 public interface PlayersMapper {
 
     PlayersMapper INSTANCE= Mappers.getMapper(PlayersMapper.class);
 
-    PlayersCurrentMatchesDTO playersCurrentMathesDTO(PlayersCurrentMathes playersCurrentMathes);
-    PlayersCurrentMathes playersCurrentMathesDTO(PlayersCurrentMatchesDTO playersCurrentMathes);
     Players players(PlayersDTO playersDTO);
+    MatchDTO matchDTO(Match match);
+
 
 }

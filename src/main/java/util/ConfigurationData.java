@@ -1,12 +1,12 @@
 package util;
 
-import model.PlayersCurrentMathes;
+import model.Match;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 public class ConfigurationData {
-    public HashMap<UUID, PlayersCurrentMathes> collectionCuurentMathes=new HashMap<>();
+    public HashMap<UUID, Match> collectionCuurentMathes=new HashMap<>();
 
     static ConfigurationData configurationData;
 

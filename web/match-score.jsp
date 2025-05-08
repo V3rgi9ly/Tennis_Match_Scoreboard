@@ -34,8 +34,8 @@
     </div>
     <div>
       <nav class="nav-links">
-        <a class="nav-link" href="#">Home</a>
-        <a class="nav-link" href="#">Matches</a>
+        <a class="nav-link" href="index.jsp">Home</a>
+        <a class="nav-link" href="matches.jsp">Matches</a>
       </nav>
     </div>
   </section>
