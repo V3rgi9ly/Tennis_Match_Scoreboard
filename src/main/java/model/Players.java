@@ -35,8 +35,14 @@ public class Players {
     @Column(name = "NAME")
     private String name;
 
+    public Players() {
+
+    }
+
     public Players(String name) {
         this.name = name;
     }
+
+
 
 }

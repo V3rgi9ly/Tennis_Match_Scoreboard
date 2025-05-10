@@ -6,21 +6,23 @@ import model.Match;
 import model.Players;
 import repository.LocalRepository;
 import repository.PlayersRepository;
+import util.ConfigurationRepository;
 
 public class MatchesService {
 
-    private LocalRepository localRepository;
-    private PlayersRepository playersRepository;
-    private final PlayersMapper playersMapper=PlayersMapper.INSTANCE;
+    ConfigurationRepository configurationRepository=ConfigurationRepository.getInstance();
+//    private LocalRepository localRepository = new LocalRepository();
+    //    private PlayersRepository playersRepository=new PlayersRepository();
+//    private final PlayersMapper playersMapper = PlayersMapper.INSTANCE;
 
-    public MatchesService(LocalRepository localRepository, PlayersRepository playersRepository) {
-        this.localRepository = localRepository;
-        this.playersRepository = playersRepository;
+    public MatchesService() {
+        configurationRepository.getLocalRepository();
+        configurationRepository.getPlayersRepository();
     }
 
-    public MatchDTO createCurrentMatch(String namePlayerOne, String namePlayerTwo) {
-        Match match=localRepository.create(namePlayerOne,namePlayerTwo);
-        return playersMapper.matchDTO(match);
+    public String createCurrentMatch(String namePlayerOne, String namePlayerTwo) {
+        String id = configurationRepository.getLocalRepository().create(namePlayerOne, namePlayerTwo);
+        return id;
     }
 
 }

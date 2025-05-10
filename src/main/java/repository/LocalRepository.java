@@ -4,28 +4,34 @@ import mapper.PlayersMapper;
 import model.Match;
 import model.Players;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import util.ConfigurationData;
 import util.HibernateUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class LocalRepository implements InterfaceLocalRepository<Match> {
 
+
     HibernateUtil configHibernate = HibernateUtil.getInstance();
     ConfigurationData configurationData = ConfigurationData.getInstance();
-    private  final PlayersMapper playersMapper=PlayersMapper.INSTANCE;
+//    private  final PlayersMapper playersMapper=PlayersMapper.INSTANCE;
 
 
     @Override
-    public Match create(String val1, String val2) {
-        Session session = configHibernate.configurationHibernate().openSession();
-        List<Players> players1;
-        Match match = null;
+    public String create(String val1, String val2) {
+        Session session = configHibernate.configurationHibernate().getCurrentSession();
+        List<Players> players1 = new ArrayList<>();
+        Match match = new Match();
 
         try {
             session.beginTransaction();
-            players1 = session.createQuery("from Players where name in (:val1, :val2)").list();
+            Query<Players> query = session.createQuery("from Players where name in (:val1, :val2)");
+            query.setParameter("val1", val1);
+            query.setParameter("val2", val2);
+            players1 = query.list();
             session.getTransaction().commit();
         } finally {
             session.close();
@@ -41,9 +47,10 @@ public class LocalRepository implements InterfaceLocalRepository<Match> {
         match.setPointScorePlayerOne(0);
         match.setPointScorePlayerTwo(0);
 
-        configurationData.collectionCuurentMathes.put(UUID.randomUUID(), match);
+        UUID uuid = UUID.randomUUID();
+        configurationData.collectionCuurentMathes.put(uuid, match);
 
-        return match;
+        return String.valueOf(uuid);
     }
 
     @Override

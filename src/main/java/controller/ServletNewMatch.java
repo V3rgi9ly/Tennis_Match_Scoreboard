@@ -18,8 +18,8 @@ import java.util.List;
 public class ServletNewMatch extends HttpServlet {
 
 
-    private PlayersService playersService;
-    private MatchesService matchesService;
+    private PlayersService playersService = new PlayersService();
+    private MatchesService matchesService = new MatchesService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,10 +30,13 @@ public class ServletNewMatch extends HttpServlet {
         String name = req.getParameter("usernameOne");
         String name2 = req.getParameter("usernameTwo");
 
-        playersService.findPlayer(name, name2);
-        matchesService.createCurrentMatch(name, name2);
-
-
+        try {
+            playersService.findPlayer(name, name2);
+            String id = matchesService.createCurrentMatch(name, name2);
+            resp.sendRedirect("match-score.jsp?" + id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
