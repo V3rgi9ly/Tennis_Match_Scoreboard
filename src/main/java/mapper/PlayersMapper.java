@@ -16,6 +16,7 @@ public interface PlayersMapper {
 
     Players players(PlayersDTO playersDTO);
     MatchDTO matchDTO(Match match);
+    List<Match> match(List<Players> players);
 
 
 }

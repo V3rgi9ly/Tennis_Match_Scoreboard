@@ -5,6 +5,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="Tennis_Match_Scoreboard" />
+          <element id="jpa-descriptors" facet="Tennis_Match_Scoreboard/jpa/JPA" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.h2database:h2:2.3.232" />
@@ -25,6 +26,8 @@
           <element id="library" level="project" name="Maven: org.antlr:antlr4-runtime:4.13.0" />
           <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" />
           <element id="library" level="project" name="Maven: jakarta.activation:jakarta.activation-api:2.1.0" />
+          <element id="library" level="project" name="Maven: org.mapstruct:mapstruct:1.5.5.Final" />
+          <element id="library" level="project" name="Maven: jakarta.servlet:jakarta.servlet-api:6.1.0" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="Tennis_Match_Scoreboard/web/Web" />

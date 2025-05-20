@@ -10,21 +10,20 @@ import util.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class LocalRepository implements InterfaceLocalRepository<Match> {
 
 
     HibernateUtil configHibernate = HibernateUtil.getInstance();
-    ConfigurationData configurationData = ConfigurationData.getInstance();
-//    private  final PlayersMapper playersMapper=PlayersMapper.INSTANCE;
+//    ConfigurationData configurationData = ConfigurationData.getInstance();
 
 
     @Override
-    public String create(String val1, String val2) {
+    public List<Players> create(String val1, String val2) {
         Session session = configHibernate.configurationHibernate().getCurrentSession();
         List<Players> players1 = new ArrayList<>();
-        Match match = new Match();
 
         try {
             session.beginTransaction();
@@ -38,19 +37,9 @@ public class LocalRepository implements InterfaceLocalRepository<Match> {
             configHibernate.configurationHibernate().close();
         }
 
-        match.setPlayersOne(players1.get(0));
-        match.setPlayersTwo(players1.get(1));
-        match.setGamesScorePlayerOne(0);
-        match.setGamesScorePlayerTwo(0);
-        match.setSetScorePlayerOne(0);
-        match.setSetScorePlayerTwo(0);
-        match.setPointScorePlayerOne(0);
-        match.setPointScorePlayerTwo(0);
 
-        UUID uuid = UUID.randomUUID();
-        configurationData.collectionCuurentMathes.put(uuid, match);
 
-        return String.valueOf(uuid);
+        return players1;
     }
 
     @Override

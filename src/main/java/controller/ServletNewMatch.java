@@ -13,6 +13,8 @@ import service.PlayersService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @WebServlet("/new-match")
 public class ServletNewMatch extends HttpServlet {
@@ -32,8 +34,11 @@ public class ServletNewMatch extends HttpServlet {
 
         try {
             playersService.findPlayer(name, name2);
-            String id = matchesService.createCurrentMatch(name, name2);
-            resp.sendRedirect("match-score.jsp?" + id);
+            UUID id = matchesService.createCurrentMatch(name, name2);
+
+
+            resp.sendRedirect("/match-score?uuid=" + id);
+//            getServletContext().getRequestDispatcher("/match-score.jsp").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,6 +9,7 @@ import model.Players;
 @Data
 @NoArgsConstructor
 public class MatchDTO {
+
     private PlayersDTO playersOne, playersTwo;
     private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;

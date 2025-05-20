@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Match {
+
     private Players playersOne, playersTwo;
 //    private int idPlayerOne, idPlayerTwo;
     private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
-    private int pointScorePlayerOne;
+    private int pointScorePlayerOne, pointScorePlayerTwo;
 
     public int getPointScorePlayerTwo() {
         return pointScorePlayerTwo;
@@ -78,5 +79,5 @@ public class Match {
         this.playersOne = playersOne;
     }
 
-    private int pointScorePlayerTwo;
+
 }
