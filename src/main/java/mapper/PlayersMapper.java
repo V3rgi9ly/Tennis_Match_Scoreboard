@@ -15,6 +15,7 @@ public interface PlayersMapper {
     PlayersMapper INSTANCE= Mappers.getMapper(PlayersMapper.class);
 
     Players players(PlayersDTO playersDTO);
+    Match matchs(MatchDTO matchDTO);
     MatchDTO matchDTO(Match match);
     List<Match> match(List<Players> players);
 

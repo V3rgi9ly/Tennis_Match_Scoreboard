@@ -36,7 +36,7 @@ public class ServletNewMatch extends HttpServlet {
             playersService.findPlayer(name, name2);
             UUID id = matchesService.createCurrentMatch(name, name2);
 
-
+            req.setAttribute("uuid", id);
             resp.sendRedirect("/match-score?uuid=" + id);
 //            getServletContext().getRequestDispatcher("/match-score.jsp").forward(req, resp);
         } catch (Exception e) {

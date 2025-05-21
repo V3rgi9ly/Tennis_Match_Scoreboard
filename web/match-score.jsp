@@ -57,22 +57,22 @@
                 <tbody>
                 <tr class="player1">
                     <td class="table-text">${playerOne}</td>
-                    <td class="table-text">${sets}</td>
-                    <td class="table-text">${games}</td>
-                    <td class="table-text">${points}</td>
+                    <td class="table-text">${setsOnePlayer}</td>
+                    <td class="table-text">${gamesOnePlayer}</td>
+                    <td class="table-text">${pointsOnePlayer}</td>
                     <td class="table-text">
-                        <form method="post" action="${pageContext.request.contextPath}/match-score">
+                        <form method="post" action="${pageContext.request.contextPath}/match-score?uuid=${uuid}">
                             <input class="score-btn" type="submit" value="Score" name="usernameOne">
                         </form>
                     </td>
                 </tr>
                 <tr class="player2">
                     <td class="table-text">${playerTwo}</td>
-                    <td class="table-text">${sets}</td>
-                    <td class="table-text">${games}</td>
-                    <td class="table-text">${points}</td>
+                    <td class="table-text">${setsTwoPlayer}</td>
+                    <td class="table-text">${gamesTwoPlayer}</td>
+                    <td class="table-text">${pointsTwoPlayer}</td>
                     <td class="table-text">
-                        <form method="post" action="${pageContext.request.contextPath}/match-score">
+                        <form method="post" action="${pageContext.request.contextPath}/match-score?uuid=${uuid}">
                                 <input class="score-btn" type="submit" value="Score" name="usernameTwo">
                         </form>
                     </td>

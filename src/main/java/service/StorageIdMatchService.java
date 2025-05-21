@@ -16,8 +16,8 @@ public class StorageIdMatchService {
         config = ConfigurationData.getInstance();
     }
 
-    public MatchDTO getMathes(UUID uuid) {
-      Match match=config.collectionCuurentMathes.get(uuid);
-      return playersMapper.matchDTO(match);
-    }
+//    public Match getMathes(UUID uuid) {
+//      Match match=config.collectionCuurentMathes.get(uuid);
+//      return playersMapper.ma(match);
+//    }
 }
