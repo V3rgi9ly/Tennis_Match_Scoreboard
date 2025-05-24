@@ -11,10 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import service.MatchScoreCalculationService;
 import service.MatchesService;
-import service.StorageIdMatchService;
+import service.FinishedMatchesPersistenceService;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.UUID;
 
 @WebServlet("/match-score")
@@ -22,7 +21,7 @@ public class ServletMatchScore extends HttpServlet {
 
 
     private MatchesService matchesService = new MatchesService();
-    private StorageIdMatchService storageIdMatchService = new StorageIdMatchService();
+    private FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
     private MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService();
 
     @Override
@@ -62,17 +61,23 @@ public class ServletMatchScore extends HttpServlet {
             matchDTO= matchScoreCalculationService.calculateMatchScore(matchDTO, nameTwo+"Two", uuid);
         }
 
+        if (matchDTO.isGameOver()==true){
+            finishedMatchesPersistenceService.saveMatch(matchDTO, uuid);
+            resp.sendRedirect("/result-match"+"?uuid="+uuid);
 
-        req.setAttribute("playerOne", matchDTO.getPlayersOne().getName());
-        req.setAttribute("playerTwo", matchDTO.getPlayersTwo().getName());
-        req.setAttribute("setsOnePlayer", matchDTO.getSetScorePlayerOne());
-        req.setAttribute("setsTwoPlayer", matchDTO.getSetScorePlayerTwo());
-        req.setAttribute("gamesOnePlayer", matchDTO.getGamesScorePlayerOne());
-        req.setAttribute("gamesTwoPlayer", matchDTO.getGamesScorePlayerTwo());
-        req.setAttribute("pointsOnePlayer", matchDTO.getPointScorePlayerOne());
-        req.setAttribute("pointsTwoPlayer", matchDTO.getPointScorePlayerTwo());
+        }else {
+            req.setAttribute("playerOne", matchDTO.getPlayersOne().getName());
+            req.setAttribute("playerTwo", matchDTO.getPlayersTwo().getName());
+            req.setAttribute("setsOnePlayer", matchDTO.getSetScorePlayerOne());
+            req.setAttribute("setsTwoPlayer", matchDTO.getSetScorePlayerTwo());
+            req.setAttribute("gamesOnePlayer", matchDTO.getGamesScorePlayerOne());
+            req.setAttribute("gamesTwoPlayer", matchDTO.getGamesScorePlayerTwo());
+            req.setAttribute("pointsOnePlayer", matchDTO.getPointScorePlayerOne());
+            req.setAttribute("pointsTwoPlayer", matchDTO.getPointScorePlayerTwo());
 
-        RequestDispatcher requestDispatcher=req.getRequestDispatcher("/match-score.jsp");
-        requestDispatcher.forward(req, resp);
+            RequestDispatcher requestDispatcher=req.getRequestDispatcher("/match-score.jsp");
+            requestDispatcher.forward(req, resp);
+        }
+
     }
 }

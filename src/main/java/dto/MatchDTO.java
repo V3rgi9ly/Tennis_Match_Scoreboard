@@ -14,6 +14,10 @@ public class MatchDTO {
     private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
     private int pointScorePlayerOne, pointScorePlayerTwo;
+    private MatchDTO matchDTO;
+    private boolean timeBreak=false;
+    private boolean gameOver=false;
+
 
     public PlayersDTO getPlayersOne() {
         return playersOne;
@@ -77,5 +81,29 @@ public class MatchDTO {
 
     public void setPointScorePlayerTwo(int pointScorePlayerTwo) {
         this.pointScorePlayerTwo = pointScorePlayerTwo;
+    }
+
+    public MatchDTO getMatchDTO() {
+        return matchDTO;
+    }
+
+    public void setMatchDTO(MatchDTO matchDTO) {
+        this.matchDTO = matchDTO;
+    }
+
+    public boolean isTimeBreak() {
+        return timeBreak;
+    }
+
+    public void setTimeBreak(boolean timeBreak) {
+        this.timeBreak = timeBreak;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 }

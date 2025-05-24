@@ -2,6 +2,7 @@ package util;
 
 import lombok.Getter;
 import repository.LocalRepository;
+import repository.MathesRepository;
 import repository.PlayersRepository;
 
 public class ConfigurationRepository {
@@ -14,9 +15,12 @@ public class ConfigurationRepository {
 
     private final PlayersRepository playersRepository;
 
+    private final MathesRepository mathesRepository;
+
     private ConfigurationRepository() {
         this.localRepository = new LocalRepository();
         this.playersRepository = new PlayersRepository();
+        this.mathesRepository = new MathesRepository();
     }
 
     public static ConfigurationRepository getInstance() {
@@ -34,4 +38,7 @@ public class ConfigurationRepository {
         return localRepository;
     }
 
+    public MathesRepository getMathesRepository() {
+        return mathesRepository;
+    }
 }

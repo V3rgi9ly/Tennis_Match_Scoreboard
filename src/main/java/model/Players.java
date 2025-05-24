@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "PLAYERS")
 public class Players {
