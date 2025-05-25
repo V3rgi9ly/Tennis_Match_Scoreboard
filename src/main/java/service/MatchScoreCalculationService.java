@@ -3,6 +3,7 @@ package service;
 import dto.MatchDTO;
 import mapper.PlayersMapper;
 import model.Match;
+import model.Matches;
 import util.ConfigurationData;
 
 import java.util.UUID;
@@ -32,7 +33,7 @@ public class MatchScoreCalculationService {
         if ((match.getGamesScorePlayerTwo() == 5 && match.getGamesScorePlayerOne() == 5) || match.isTimeBreak() == true) {
             match = calculateMatchScoreGamesTimeBreak(match, score);
             match.setTimeBreak(true);
-        }else if(match.isTimeBreak() == false) {
+        } else if (match.isTimeBreak() == false) {
             if (match.getGamesScorePlayerOne() > match.getGamesScorePlayerTwo() && match.getGamesScorePlayerOne() == 6) {
                 match = calculateMatchScoreSet(match, score);
             } else if (match.getGamesScorePlayerTwo() > match.getGamesScorePlayerOne() && match.getGamesScorePlayerTwo() == 6) {
@@ -113,7 +114,18 @@ public class MatchScoreCalculationService {
 
     private boolean checkingTheWinningMatch(Match match) {
 
-        return match.getSetScorePlayerOne() == 2 || match.getSetScorePlayerTwo() == 2;
+        if (match.getSetScorePlayerOne() == 2) {
+
+            match.setWinner(match.getPlayersOne());
+            match.setGameOver(true);
+
+        } else if (match.getSetScorePlayerTwo() == 2) {
+
+            match.setWinner(match.getPlayersTwo());
+            match.setGameOver(true);
+        }
+
+        return match.isGameOver();
     }
 
 }

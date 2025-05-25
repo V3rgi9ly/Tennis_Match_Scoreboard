@@ -14,9 +14,9 @@ public class Match {
     private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
     private int pointScorePlayerOne, pointScorePlayerTwo;
-    private Matches matchesh;
     private boolean timeBreak=false;
     private boolean gameOver=false;
+    private Players winner;
 
     public int getPointScorePlayerTwo() {return pointScorePlayerTwo;}
 
@@ -80,13 +80,6 @@ public class Match {
         this.playersOne = playersOne;
     }
 
-    public Matches getMatchesh() {
-        return matchesh;
-    }
-
-    public void setMatchesh(Matches matchesh) {
-        this.matchesh = matchesh;
-    }
 
     public boolean isGameOver() {
         return gameOver;
@@ -102,5 +95,13 @@ public class Match {
 
     public void setTimeBreak(boolean timeBreak) {
         this.timeBreak = timeBreak;
+    }
+
+    public Players getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Players winner) {
+        this.winner = winner;
     }
 }
