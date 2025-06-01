@@ -3,11 +3,8 @@ package service;
 import dto.MatchDTO;
 import mapper.PlayersMapper;
 import model.Match;
-import model.Matches;
 import util.ConfigurationData;
 import util.ConfigurationRepository;
-
-import java.util.UUID;
 
 public class FinishedMatchesPersistenceService {
 
@@ -21,7 +18,7 @@ public class FinishedMatchesPersistenceService {
     }
 
     public void saveMatch(MatchDTO matchDTO) {
-        Match match=playersMapper.matchs(matchDTO);
+        Match match=playersMapper.match(matchDTO);
         repository.getMathesRepository().save(match);
 
     }

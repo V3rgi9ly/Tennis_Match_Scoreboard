@@ -2,7 +2,6 @@ package repository;
 
 import model.Players;
 import org.hibernate.Session;
-import org.hibernate.cache.spi.QueryResultsCache;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
 

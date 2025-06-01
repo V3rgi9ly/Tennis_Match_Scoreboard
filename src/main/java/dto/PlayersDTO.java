@@ -31,4 +31,8 @@ public class PlayersDTO {
     public PlayersDTO( String name) {
         this.name = name;
     }
+
+    public String toString() {
+        return name;
+    }
 }

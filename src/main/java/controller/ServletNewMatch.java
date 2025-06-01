@@ -28,7 +28,7 @@ public class ServletNewMatch extends HttpServlet {
         getServletContext().getRequestDispatcher("/newMatch.jsp").forward(req, resp);
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String name = req.getParameter("usernameOne");
         String name2 = req.getParameter("usernameTwo");
 

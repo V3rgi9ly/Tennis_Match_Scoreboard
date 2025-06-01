@@ -2,7 +2,6 @@ package dto;
 
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import model.Players;
 
@@ -10,7 +9,7 @@ import model.Players;
 @NoArgsConstructor
 public class MatchDTO {
 
-    private PlayersDTO playersOne, playersTwo;
+    private Players player1, player2;
     private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
     private int pointScorePlayerOne, pointScorePlayerTwo;
@@ -19,20 +18,20 @@ public class MatchDTO {
     private Players winner;
 
 
-    public PlayersDTO getPlayersOne() {
-        return playersOne;
+    public Players getPlayer1() {
+        return player1;
     }
 
-    public void setPlayersOne(PlayersDTO playersOne) {
-        this.playersOne = playersOne;
+    public void setPlayer1(Players player1) {
+        this.player1 = player1;
     }
 
-    public PlayersDTO getPlayersTwo() {
-        return playersTwo;
+    public Players getPlayer2() {
+        return player2;
     }
 
-    public void setPlayersTwo(PlayersDTO playersTwo) {
-        this.playersTwo = playersTwo;
+    public void setPlayer2(Players player2) {
+        this.player2 = player2;
     }
 
     public int getSetScorePlayerOne() {

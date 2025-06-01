@@ -1,17 +1,13 @@
 package repository;
 
-import mapper.PlayersMapper;
 import model.Match;
 import model.Players;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import util.ConfigurationData;
 import util.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class LocalRepository implements InterfaceLocalRepository<Match> {
 

@@ -2,20 +2,23 @@ package model;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
-@Data
 @Entity
 @Table(name="MATCHES")
 @NoArgsConstructor
 
 public class Matches {
-
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Getter
+    @Setter
     @OneToOne( cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH
@@ -23,6 +26,8 @@ public class Matches {
     @JoinColumn(name = "PLAYER1")
     private Players player1;
 
+    @Getter
+    @Setter
     @OneToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH
@@ -30,6 +35,8 @@ public class Matches {
     @JoinColumn(name = "PLAYER2")
     private Players player2;
 
+    @Getter
+    @Setter
     @OneToOne( cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH
@@ -37,27 +44,7 @@ public class Matches {
     @JoinColumn(name = "WINNER")
     private Players winner;
 
-    public Players getWinner() {
-        return winner;
-    }
-
-    public void setWinner(Players winner) {
-        this.winner = winner;
-    }
-
-    public Players getPlayer2() {
-        return player2;
-    }
-
-    public void setPlayer2(Players player2) {
-        this.player2 = player2;
-    }
-
-    public Players getPlayer1() {
-        return player1;
-    }
-
-    public void setPlayer1(Players player1) {
-        this.player1 = player1;
+    public String toString() {
+        return "Matches [player1=" + player1 + ", player2=" + player2+ ", winner=" + winner + "]";
     }
 }

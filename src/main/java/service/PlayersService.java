@@ -1,16 +1,14 @@
 package service;
 
 import model.Players;
-import repository.PlayersRepository;
 import util.ConfigurationRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayersService {
 
 
-    ConfigurationRepository configurationRepository=ConfigurationRepository.getInstance();
+    ConfigurationRepository configurationRepository = ConfigurationRepository.getInstance();
 
     public PlayersService() {
         configurationRepository.getPlayersRepository();
@@ -18,16 +16,34 @@ public class PlayersService {
 
 
     public void findPlayer(String playerOne, String playerTwo) {
-        for (Players players : configurationRepository.getPlayersRepository().find(playerOne)) {
-            if (!players.getName().equals(playerOne)) {
+        Players players1 = new Players();
+        players1.setName(playerOne);
+
+        Players players2 = new Players();
+        players2.setName(playerTwo);
+
+        List<Players> players3 =configurationRepository.getPlayersRepository().find(playerOne);
+        List<Players> players4 =configurationRepository.getPlayersRepository().find(playerTwo);
+
+            if (players3.size()==0 && players4.size()==0) {
                 createPlayer(playerOne);
-            }
-        }
-        for (Players players : configurationRepository.getPlayersRepository().find(playerTwo)) {
-            if (!players.getName().equals(playerTwo)) {
                 createPlayer(playerTwo);
             }
-        }
+            else if ((players3.size()!=0 && players4.size()==0)){
+                createPlayer(playerTwo);
+            }else if ((players3.size()==0 && players4.size()!=0)){
+                createPlayer(playerOne);
+            }
+//            if (!players1.getName().equals(players.getName())) {
+//
+//            }
+
+
+//            if (!players2.getName().equals(players.getName())) {
+//                createPlayer(playerTwo);
+//            }
+
+
     }
 
 

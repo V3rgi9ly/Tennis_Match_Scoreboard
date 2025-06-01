@@ -2,16 +2,16 @@ package model;
 
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class Match {
 
-    private Players playersOne, playersTwo;
+    private Players player1,
+            player2;
 //    private int idPlayerOne, idPlayerTwo;
-    private int setScorePlayerOne, setScorePlayerTwo;
+    private int setScorePlayerOne=0, setScorePlayerTwo=0;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
     private int pointScorePlayerOne, pointScorePlayerTwo;
     private boolean timeBreak=false;
@@ -64,20 +64,20 @@ public class Match {
         this.setScorePlayerOne = setScorePlayerOne;
     }
 
-    public Players getPlayersTwo() {
-        return playersTwo;
+    public Players getPlayer2() {
+        return player2;
     }
 
-    public void setPlayersTwo(Players playersTwo) {
-        this.playersTwo = playersTwo;
+    public void setPlayer2(Players player2) {
+        this.player2 = player2;
     }
 
     public Players getPlayersOne() {
-        return playersOne;
+        return player1;
     }
 
     public void setPlayersOne(Players playersOne) {
-        this.playersOne = playersOne;
+        this.player1 = playersOne;
     }
 
 

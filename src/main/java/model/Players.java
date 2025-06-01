@@ -3,9 +3,6 @@ package model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @Entity
@@ -40,6 +37,10 @@ public class Players {
 
     public Players(String name) {
         this.name = name;
+    }
+
+    public String toString() {
+        return name;
     }
 
 

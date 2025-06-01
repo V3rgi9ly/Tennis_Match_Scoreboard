@@ -3,7 +3,6 @@ package controller;
 
 import dto.MatchDTO;
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +12,6 @@ import service.MatchScoreCalculationService;
 import service.MatchesService;
 import service.FinishedMatchesPersistenceService;
 
-import java.io.IOException;
 import java.util.UUID;
 
 @WebServlet("/match-score")
@@ -25,24 +23,25 @@ public class ServletMatchScore extends HttpServlet {
     private MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
         UUID uuid = UUID.fromString(req.getParameter("uuid"));
-        MatchDTO matchDTO = matchesService.getCurrentMatch(uuid);
+
 
 
         try {
+            MatchDTO matchDTO = matchesService.getCurrentMatch(uuid);
             HttpSession session = req.getSession();
             session.setAttribute("uuid", uuid);
 
 
-            req.setAttribute("playerOne", matchDTO.getPlayersOne().getName());
-            req.setAttribute("playerTwo", matchDTO.getPlayersTwo().getName());
-            req.setAttribute("sets", matchDTO.getSetScorePlayerOne());
-            req.setAttribute("sets", matchDTO.getSetScorePlayerTwo());
-            req.setAttribute("games", matchDTO.getGamesScorePlayerOne());
-            req.setAttribute("games", matchDTO.getGamesScorePlayerTwo());
-            req.setAttribute("points", matchDTO.getPointScorePlayerOne());
-            req.setAttribute("points", matchDTO.getPointScorePlayerTwo());
+            req.setAttribute("playerOne", matchDTO.getPlayer1().getName());
+            req.setAttribute("playerTwo", matchDTO.getPlayer2().getName());
+            req.setAttribute("setsOnePlayer", matchDTO.getSetScorePlayerOne());
+            req.setAttribute("setsTwoPlayer", matchDTO.getSetScorePlayerTwo());
+            req.setAttribute("gamesOnePlayer", matchDTO.getGamesScorePlayerOne());
+            req.setAttribute("gamesTwoPlayer", matchDTO.getGamesScorePlayerTwo());
+            req.setAttribute("pointsOnePlayer", matchDTO.getPointScorePlayerOne());
+            req.setAttribute("pointsTwoPlayer", matchDTO.getPointScorePlayerTwo());
 
             getServletContext().getRequestDispatcher("/match-score.jsp").forward(req, resp);
         }catch (Exception e) {
@@ -53,12 +52,11 @@ public class ServletMatchScore extends HttpServlet {
 
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)  {
         UUID uuid = UUID.fromString(req.getParameter("uuid"));
         String nameOne = req.getParameter("usernameOne");
         String nameTwo = req.getParameter("usernameTwo");
 
-        HttpSession session = req.getSession();
         MatchDTO matchDTO = null;
         try {
             if (nameOne != null) {
@@ -72,8 +70,8 @@ public class ServletMatchScore extends HttpServlet {
                 resp.sendRedirect("/result-match" + "?uuid=" + uuid);
 
             } else {
-                req.setAttribute("playerOne", matchDTO.getPlayersOne().getName());
-                req.setAttribute("playerTwo", matchDTO.getPlayersTwo().getName());
+                req.setAttribute("playerOne", matchDTO.getPlayer1().getName());
+                req.setAttribute("playerTwo", matchDTO.getPlayer2().getName());
                 req.setAttribute("setsOnePlayer", matchDTO.getSetScorePlayerOne());
                 req.setAttribute("setsTwoPlayer", matchDTO.getSetScorePlayerTwo());
                 req.setAttribute("gamesOnePlayer", matchDTO.getGamesScorePlayerOne());

@@ -3,7 +3,6 @@ package service;
 import dto.MatchDTO;
 import mapper.PlayersMapper;
 import model.Match;
-import model.Matches;
 import util.ConfigurationData;
 
 import java.util.UUID;
@@ -121,7 +120,7 @@ public class MatchScoreCalculationService {
 
         } else if (match.getSetScorePlayerTwo() == 2) {
 
-            match.setWinner(match.getPlayersTwo());
+            match.setWinner(match.getPlayer2());
             match.setGameOver(true);
         }
 

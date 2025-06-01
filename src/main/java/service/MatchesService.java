@@ -4,8 +4,6 @@ import dto.MatchDTO;
 import mapper.PlayersMapper;
 import model.Match;
 import model.Players;
-import repository.LocalRepository;
-import repository.PlayersRepository;
 import util.ConfigurationData;
 import util.ConfigurationRepository;
 
@@ -28,8 +26,8 @@ public class MatchesService {
         Match match1 = new Match();
         List<Players> players = configurationRepository.getLocalRepository().create(namePlayerOne, namePlayerTwo);
 
-        match1.setPlayersOne(players.get(0));
-        match1.setPlayersTwo(players.get(1));
+        match1.setPlayer1(players.get(0));
+        match1.setPlayer2(players.get(1));
         match1.setGamesScorePlayerOne(0);
         match1.setGamesScorePlayerTwo(0);
         match1.setSetScorePlayerOne(0);
@@ -46,6 +44,7 @@ public class MatchesService {
     public MatchDTO getCurrentMatch(UUID uuid) {
         Match match = configurationData.collectionCuurentMathes.get(uuid);
         return playersMapper.matchDTO(match);
+
     }
 
 

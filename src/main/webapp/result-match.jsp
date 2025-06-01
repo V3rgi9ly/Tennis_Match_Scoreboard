@@ -29,32 +29,36 @@
         </div>
         <div>
             <nav class="nav-links">
-                <a class="nav-link" href="#">Home</a>
-                <a class="nav-link" href="#">Matches</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/main">Home</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/matches">Matches</a>
             </nav>
         </div>
     </section>
 </header>
 <main>
     <div class="container">
-        <h1>Matches</h1>
-        <div class="input-container">
-            <input class="input-filter" placeholder="Filter by name" type="text" />
-            <div>
-                <a href="#">
-                    <button class="btn-filter">Reset Filter</button>
-                </a>
-            </div>
-        </div>
+        <h1>Result-match</h1>
 
-        <table class="table-matches">
-            <tr>
-                <th>${playerOne}</th>
-                <th>${playerTwo}</th>
-                <th>${playerWinner}</th>
-            </tr>
-
-        </table>
+        <section class="score">
+            <table class="table-matches">
+                <table class="table">
+                    <thead class="result">
+                    <tr>
+                        <th class="table-text">PlayerOne</th>
+                        <th class="table-text">PlayerTwo</th>
+                        <th class="table-text">PlayerWinner</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="table-text">${playerOne}</td>
+                        <td class="table-text">${playerTwo}</td>
+                        <td class="table-text">${playerWinner}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </table>
+        </section>
     </div>
 </main>
 </body>

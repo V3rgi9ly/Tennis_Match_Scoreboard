@@ -1,11 +1,8 @@
 package repository;
 
-import model.Match;
 import model.Players;
 
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public interface InterfaceLocalRepository<T> {
     public List<Players> create(String val1, String val2);
