@@ -32,6 +32,28 @@ public class MathesRepository implements InterfaceMathesRepository {
         }
     }
 
+    public List<Matches> findAll(String val1) {
+
+        List<Matches> matches = new ArrayList<>();
+        Session session = configHibernate.configurationHibernate().getCurrentSession();
+        try {
+
+            session.beginTransaction();
+            Query<Matches> query = session.createQuery("from Matches where player1.name=:val or player2.name=:val");
+            query.setParameter("val", val1);
+            matches = query.list();
+            session.getTransaction().commit();
+
+        } finally {
+            session.close();
+            configHibernate.configurationHibernate().close();
+        }
+        return matches;
+    }
+
+
+
+
     @Override
     public List<Matches> findAll(int val1, int val2) {
 
@@ -72,6 +94,24 @@ public class MathesRepository implements InterfaceMathesRepository {
         try {
             session.beginTransaction();
             query = (Long)session.createQuery("select count(*) from Matches").getSingleResult();
+
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+            configHibernate.configurationHibernate().close();
+        }
+        return query;
+    }
+
+    public Long getCountInTable(String val1) {
+        Session session = configHibernate.configurationHibernate().getCurrentSession();
+
+        Long query;
+
+        try {
+            session.beginTransaction();
+            query = (Long)session.createQuery("select count(*) from Matches where player1.name=:val1 or player2.name=:val1").setParameter("val1", val1).getSingleResult();
 
 
             session.getTransaction().commit();

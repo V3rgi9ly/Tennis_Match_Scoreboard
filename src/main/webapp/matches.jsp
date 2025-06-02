@@ -43,12 +43,13 @@
     <div class="container">
         <h1>Matches</h1>
         <div class="input-container">
-            <input class="input-filter" placeholder="Filter by name" type="text"/>
-            <div>
-                <a href="#">
-                    <button class="btn-filter">Reset Filter</button>
-                </a>
-            </div>
+
+
+            <form action="${pageContext.request.contextPath}/matches" method="get">
+                <input class="input-filter" placeholder="Filter by name" type="text" name="name"/>
+                <input type="hidden" name="page" value="1" />
+                <button class="btn-filter" type="submit">Apply Filter</button>
+            </form>
         </div>
 
         <table class="table-matches">
@@ -74,8 +75,12 @@
 
             <c:choose>
                 <c:when test="${pages.size() == 1}">
+                    <a class="prev" href="${pageContext.request.contextPath}/matches?page=${page+0}">
+                        < </a>
                     <a class="num-page current"
                        href="${pageContext.request.contextPath}/matches?page=${page}">${page}</a>
+                    <a class="next" href="${pageContext.request.contextPath}/matches?page=${page+0}">
+                        > </a>
                 </c:when>
                 <c:when test="${pages.size() == 2}">
                     <c:forEach var="i" items="${pages}" varStatus="loop">
@@ -143,7 +148,6 @@
                 </c:when>
             </c:choose>
         </div>
-        0
     </div>
 </main>
 

@@ -37,4 +37,17 @@ public class GetListMathesService {
         }
         return pages;
     }
+
+    public List<Integer> getListPages(String val1){
+        Long page=repository.getMathesRepository().getCountInTable(val1);
+
+        if (page%5>0){
+            page=(page-5)+1;
+        }
+        List<Integer> pages=new ArrayList<Integer>();
+        for (int i=1; i<=page; i++) {
+            pages.add(i);
+        }
+        return pages;
+    }
 }
