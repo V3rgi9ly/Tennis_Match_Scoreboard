@@ -25,12 +25,12 @@ public class ServletGetMathes extends HttpServlet {
         String name = req.getParameter("name");
 
 
-        List<MathesDTO> mathesDTO = null;
-        List<Integer> pages = service.getListPages();
+        List<MathesDTO> mathesDTO;
+        List<Integer> pages;
 
         try {
-            if (name != null && !name.equals("")) {
-               mathesDTO = searchService.searchMathesByName(name);
+            if ((name != null && !name.equals("")) || (name != null && !name.equals("") && a==1)  ) {
+                mathesDTO = searchService.searchMathesByName(name);
                 pages = service.getListPages(name);
             } else {
                 mathesDTO = service.getListMathes(a);
@@ -40,6 +40,7 @@ public class ServletGetMathes extends HttpServlet {
             req.setAttribute("mathesDTO", mathesDTO);
             req.setAttribute("page", a);
             req.setAttribute("pages", pages);
+            req.setAttribute("name", name);
 
             getServletContext().getRequestDispatcher("/matches.jsp").forward(req, resp);
         } catch (Exception e) {

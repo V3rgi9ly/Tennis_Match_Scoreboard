@@ -34,8 +34,12 @@
         </div>
         <div>
             <nav class="nav-links">
-                <a class="nav-link" href="index.jsp">Home</a>
-                <a class="nav-link" href="matches.jsp">Matches</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/main">Home</a>
+                <%
+                    String a="1";
+                    request.setAttribute("page",a);
+                %>
+                <a class="nav-link" href="${pageContext.request.contextPath}/matches?page=${page}">Matches</a>
             </nav>
         </div>
     </section>

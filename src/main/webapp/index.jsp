@@ -29,7 +29,6 @@
         </div>
         <div>
             <nav class="nav-links">
-                <a class="nav-link" href="index.jsp">Home</a>
                 <%
                     String a="1";
                     request.setAttribute("page",a);
@@ -45,13 +44,13 @@
         <p>Manage your tennis matches, record results, and track rankings</p>
         <div class="welcome-image"></div>
         <div class="form-container center">
-            <a class="homepage-action-button" href="http://localhost:8081/new-match">
+            <a class="homepage-action-button" href="${pageContext.request.contextPath}/new-match">
                 <button class="btn start-match">
                     Start a new match
                 </button>
 
             </a>
-            <a class="homepage-action-button" href="matches.jsp">
+            <a class="homepage-action-button" href="${pageContext.request.contextPath}/matches?page=${page}">
                 <button class="btn view-results">
                     View match results
                 </button>

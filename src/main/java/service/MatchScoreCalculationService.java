@@ -29,10 +29,13 @@ public class MatchScoreCalculationService {
 
         match = calculateMatchScorePoint(match, score);
 
-        if ((match.getGamesScorePlayerTwo() == 5 && match.getGamesScorePlayerOne() == 5) || match.isTimeBreak() == true) {
+        if ((match.getGamesScorePlayerTwo() == 5 && match.getGamesScorePlayerOne() == 5)) {
             match = calculateMatchScoreGamesTimeBreak(match, score);
             match.setTimeBreak(true);
-        } else if (match.isTimeBreak() == false) {
+        }else if(match.isTimeBreak() == true){
+            match = calculateMatchScoreGamesTimeBreak(match, score);
+        }
+        else if (match.isTimeBreak() == false) {
             if (match.getGamesScorePlayerOne() > match.getGamesScorePlayerTwo() && match.getGamesScorePlayerOne() == 6) {
                 match = calculateMatchScoreSet(match, score);
             } else if (match.getGamesScorePlayerTwo() > match.getGamesScorePlayerOne() && match.getGamesScorePlayerTwo() == 6) {

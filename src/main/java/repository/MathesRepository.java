@@ -57,6 +57,7 @@ public class MathesRepository implements InterfaceMathesRepository {
     @Override
     public List<Matches> findAll(int val1, int val2) {
 
+
         List<Matches> matches = new ArrayList<>();
         Session session = configHibernate.configurationHibernate().getCurrentSession();
         try {

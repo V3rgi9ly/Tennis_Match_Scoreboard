@@ -18,8 +18,7 @@ public class MatchesService {
     private final PlayersMapper playersMapper = PlayersMapper.INSTANCE;
 
     public MatchesService() {
-        configurationRepository.getLocalRepository();
-        configurationRepository.getPlayersRepository();
+
     }
 
     public UUID createCurrentMatch(String namePlayerOne, String namePlayerTwo) {
