@@ -16,7 +16,7 @@ public class MatchScoreCalculationService {
         config = ConfigurationData.getInstance();
     }
 
-    public MatchDTO calculateMatchScore(MatchDTO match, String score, UUID uuid) {
+    public MatchDTO calculateMatchScore(String score, UUID uuid) {
         Match match1 = config.collectionCuurentMathes.get(uuid);
         match1 = collectingPointInMatch(match1, score);
         config.collectionCuurentMathes.put(uuid, match1);
@@ -25,17 +25,17 @@ public class MatchScoreCalculationService {
 
     }
 
-    private Match collectingPointInMatch(Match match, String score) {
+    public Match collectingPointInMatch(Match match, String score) {
 
         match = calculateMatchScorePoint(match, score);
+//        match=checkAdvantage(match, score);
 
         if ((match.getGamesScorePlayerTwo() == 5 && match.getGamesScorePlayerOne() == 5)) {
             match = calculateMatchScoreGamesTimeBreak(match, score);
             match.setTimeBreak(true);
-        }else if(match.isTimeBreak() == true){
+        } else if (match.isTimeBreak() == true) {
             match = calculateMatchScoreGamesTimeBreak(match, score);
-        }
-        else if (match.isTimeBreak() == false) {
+        } else if (match.isTimeBreak() == false) {
             if (match.getGamesScorePlayerOne() > match.getGamesScorePlayerTwo() && match.getGamesScorePlayerOne() == 6) {
                 match = calculateMatchScoreSet(match, score);
             } else if (match.getGamesScorePlayerTwo() > match.getGamesScorePlayerOne() && match.getGamesScorePlayerTwo() == 6) {
@@ -45,6 +45,7 @@ public class MatchScoreCalculationService {
 
         return match;
     }
+
 
     private Match calculateMatchScorePoint(Match match, String score) {
 
@@ -83,6 +84,23 @@ public class MatchScoreCalculationService {
         }
         return match;
     }
+
+    private Match checkAdvantage(Match match, String score) {
+        if (match.getPointScorePlayerOne() == match.getPointScorePlayerTwo() && match.getPointScorePlayerOne() == 40 && match.getPointScorePlayerTwo() == 40) {
+            match = Advantage(match, score);
+        }
+        return match;
+    }
+
+    private Match Advantage(Match match, String score) {
+        if (score.equals("ScoreOne")) {
+            match.setPointScorePlayerOne(Integer.parseInt(null + "AD"));
+        } else if (score.equals("ScoreTwo")) {
+            match.setPointScorePlayerTwo(Integer.parseInt(null + "AD"));
+        }
+        return match;
+    }
+
 
     private Match calculateMatchScoreGamesTimeBreak(Match match, String score) {
 

@@ -60,9 +60,9 @@ public class ServletMatchScore extends HttpServlet {
         MatchDTO matchDTO = null;
         try {
             if (nameOne != null) {
-                matchDTO = matchScoreCalculationService.calculateMatchScore(matchDTO, nameOne + "One", uuid);
+                matchDTO = matchScoreCalculationService.calculateMatchScore(nameOne + "One", uuid);
             } else if (nameTwo != null) {
-                matchDTO = matchScoreCalculationService.calculateMatchScore(matchDTO, nameTwo + "Two", uuid);
+                matchDTO = matchScoreCalculationService.calculateMatchScore( nameTwo + "Two", uuid);
             }
 
             if (matchDTO.isGameOver() == true) {

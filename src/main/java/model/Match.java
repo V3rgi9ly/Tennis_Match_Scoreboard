@@ -11,7 +11,7 @@ public class Match {
     private Players player1,
             player2;
 //    private int idPlayerOne, idPlayerTwo;
-    private int setScorePlayerOne=0, setScorePlayerTwo=0;
+    private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
     private int pointScorePlayerOne, pointScorePlayerTwo;
     private boolean timeBreak=false;
@@ -103,5 +103,16 @@ public class Match {
 
     public void setWinner(Players winner) {
         this.winner = winner;
+    }
+
+    public Match(Players player1, Players player2, int setScorePlayerOne, int setScorePlayerTwo, int gamesScorePlayerOne, int gamesScorePlayerTwo, int pointScorePlayerOne, int pointScorePlayerTwo) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.setScorePlayerOne = setScorePlayerOne;
+        this.setScorePlayerTwo = setScorePlayerTwo;
+        this.gamesScorePlayerOne = gamesScorePlayerOne;
+        this.gamesScorePlayerTwo = gamesScorePlayerTwo;
+        this.pointScorePlayerOne = pointScorePlayerOne;
+        this.pointScorePlayerTwo = pointScorePlayerTwo;
     }
 }
