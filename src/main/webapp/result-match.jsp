@@ -31,8 +31,8 @@
             <nav class="nav-links">
                 <a class="nav-link" href="${pageContext.request.contextPath}/main">Home</a>
                 <%
-                    String a="1";
-                    request.setAttribute("page",a);
+                    String a = "1";
+                    request.setAttribute("page", a);
                 %>
                 <a class="nav-link" href="${pageContext.request.contextPath}/matches?page=${page}">Matches</a>
             </nav>
@@ -42,27 +42,21 @@
 <main>
     <div class="container">
         <h1>Result-match</h1>
+        <table class="table-matches">
+            <tr>
+                <th>PlayerOne</th>
+                <th>PlayerTwo</th>
+                <th>Winner</th>
+            </tr>
+        </table>
 
-        <section class="score">
-            <table class="table-matches">
-                <table class="table">
-                    <thead class="result">
-                    <tr>
-                        <th class="table-text">PlayerOne</th>
-                        <th class="table-text">PlayerTwo</th>
-                        <th class="table-text">PlayerWinner</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="table-text">${playerOne}</td>
-                        <td class="table-text">${playerTwo}</td>
-                        <td class="table-text">${playerWinner}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </table>
-        </section>
+        <table class="table-matches">
+            <tr>
+                <td>${playerOne}</td>
+                <td>${playerTwo}</td>
+                <td><span class="winner-name-td">${playerWinner}</span></td>
+            </tr>
+        </table>
     </div>
 </main>
 </body>

@@ -41,13 +41,14 @@
 <main>
     <div class="container">
         <h1>Matches</h1>
-        <div class="input-container">
+        <div class="form-filter">
 
-
-            <form action="${pageContext.request.contextPath}/matches" method="get">
+            <form action="${pageContext.request.contextPath}/matches" method="get" class="filter-container">
                 <input class="input-filter" placeholder="Filter by name" type="text" name="name"/>
                 <input type="hidden" name="page" value="1"/>
+                <br></br>
                 <button class="btn-filter" type="submit">Apply Filter</button>
+
             </form>
         </div>
 
@@ -151,20 +152,22 @@
                                             > </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a class="prev" href="${pageContext.request.contextPath}/matches?page=${page-1}&name=${name}">
+                                        <a class="prev"
+                                           href="${pageContext.request.contextPath}/matches?page=${page-1}&name=${name}">
                                             < </a>
                                         <c:if test="${page>1}">
-                                        <a class="num-page"
-                                           href="${pageContext.request.contextPath}/matches?page=${page-1}&name=${name}">${page-1}</a>
+                                            <a class="num-page"
+                                               href="${pageContext.request.contextPath}/matches?page=${page-1}&name=${name}">${page-1}</a>
                                         </c:if>
                                         <a class="num-page current"
                                            href="${pageContext.request.contextPath}/matches?page=${page}&name=${name}">${page}</a>
 
                                         <c:if test="${page+1<=pages.size()}">
-                                        <a class="num-page"
-                                           href="${pageContext.request.contextPath}/matches?page=${page+1}&name=${name}">${page+1}</a>
+                                            <a class="num-page"
+                                               href="${pageContext.request.contextPath}/matches?page=${page+1}&name=${name}">${page+1}</a>
                                         </c:if>
-                                        <a class="next" href="${pageContext.request.contextPath}/matches?page=${page+1}&name=${name}">
+                                        <a class="next"
+                                           href="${pageContext.request.contextPath}/matches?page=${page+1}&name=${name}">
                                             > </a>
                                     </c:otherwise>
                                 </c:choose>
