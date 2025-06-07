@@ -31,8 +31,8 @@ public class MatchesService {
         match1.setGamesScorePlayerTwo(0);
         match1.setSetScorePlayerOne(0);
         match1.setSetScorePlayerTwo(0);
-        match1.setPointScorePlayerOne(0);
-        match1.setPointScorePlayerTwo(0);
+        match1.setPointScorePlayerOne("0");
+        match1.setPointScorePlayerTwo("0");
 
         UUID uuid = UUID.randomUUID();
         configurationData.collectionCuurentMathes.put(uuid, match1);

@@ -4,16 +4,25 @@ import dto.MatchDTO;
 import mapper.PlayersMapper;
 import model.Match;
 import util.ConfigurationData;
+import util.ParseVariableMatch;
 
 import java.util.UUID;
 
 public class MatchScoreCalculationService {
 
+    private ParseVariableMatch parseVariableMatch;
     private PlayersMapper playersMapper = PlayersMapper.INSTANCE;
     private ConfigurationData config;
 
+
+    public MatchScoreCalculationService(ParseVariableMatch parseVariableMatch) {
+        this.parseVariableMatch = parseVariableMatch;
+    }
+
     public MatchScoreCalculationService() {
+        parseVariableMatch = new ParseVariableMatch();
         config = ConfigurationData.getInstance();
+
     }
 
     public MatchDTO calculateMatchScore(String score, UUID uuid) {
@@ -25,23 +34,37 @@ public class MatchScoreCalculationService {
 
     }
 
+
     public Match collectingPointInMatch(Match match, String score) {
+        if (parseVariableMatch.getB() == parseVariableMatch.getA() && parseVariableMatch.getB() == 40 && parseVariableMatch.getA() == 40) {
+            match = advantage(match, score);
+            match.setAdvantage(true);
+        } else if (match.isAdvantage() == true) {
+            match = advantage(match, score);
+        } else if ((match.getGamesScorePlayerTwo() == 5 && match.getGamesScorePlayerOne() == 5)) {
+            match = calculateMatchScorePoint(match, score);
+            match = parseVariableMatch.parsePointScore(match);
+            match.setSetTiedAtFive(true);
+            match = calculateSetTiedAtFive(match);
+        } else if (match.isSetTiedAtFive() == true) {
+            match = calculateMatchScorePoint(match, score);
+            match = parseVariableMatch.parsePointScore(match);
+            match = calculateSetTiedAtFive(match);
 
-        match = calculateMatchScorePoint(match, score);
-//        match=checkAdvantage(match, score);
-
-        if ((match.getGamesScorePlayerTwo() == 5 && match.getGamesScorePlayerOne() == 5)) {
-            match = calculateMatchScoreGamesTimeBreak(match, score);
-            match.setTimeBreak(true);
-        } else if (match.isTimeBreak() == true) {
-            match = calculateMatchScoreGamesTimeBreak(match, score);
-        } else if (match.isTimeBreak() == false) {
+        } else if (match.isTieBreak()==true) {
+            match=MatchScoreGamesTieBreak(match, score);
+            match = parseVariableMatch.parsePointScore(match);
+            
+        } else if (match.isTieBreak() == false) {
+            match = calculateMatchScorePoint(match, score);
             if (match.getGamesScorePlayerOne() > match.getGamesScorePlayerTwo() && match.getGamesScorePlayerOne() == 6) {
                 match = calculateMatchScoreSet(match, score);
             } else if (match.getGamesScorePlayerTwo() > match.getGamesScorePlayerOne() && match.getGamesScorePlayerTwo() == 6) {
                 match = calculateMatchScoreSet(match, score);
             }
+            match = parseVariableMatch.parsePointScore(match);
         }
+
 
         return match;
     }
@@ -50,31 +73,32 @@ public class MatchScoreCalculationService {
     private Match calculateMatchScorePoint(Match match, String score) {
 
         if (score.equals("ScoreOne")) {
-            if (match.getPointScorePlayerOne() == 30) {
-                match.setPointScorePlayerOne(match.getPointScorePlayerOne() + 10);
+            if (parseVariableMatch.getA() == 30) {
+                parseVariableMatch.setA(parseVariableMatch.getA() + 10);
             } else {
-                match.setPointScorePlayerOne(match.getPointScorePlayerOne() + 15);
-                if (match.getPointScorePlayerOne() > 40) {
-                    match.setPointScorePlayerOne(match.getPointScorePlayerOne() * 0);
-                    match.setPointScorePlayerTwo(match.getPointScorePlayerTwo() * 0);
+                parseVariableMatch.setA(parseVariableMatch.getA() + 15);
+                if (parseVariableMatch.getA() > 40) {
+                    parseVariableMatch.setA(parseVariableMatch.getA() * 0);
+                    parseVariableMatch.setB(parseVariableMatch.getB() * 0);
                     match = calculateMatchScoreGames(match, score);
                 }
             }
         } else if (score.equals("ScoreTwo")) {
-            if (match.getPointScorePlayerTwo() == 30) {
-                match.setPointScorePlayerTwo(match.getPointScorePlayerTwo() + 10);
+            if (parseVariableMatch.getB() == 30) {
+                parseVariableMatch.setB(parseVariableMatch.getB() + 10);
 
             } else {
-                match.setPointScorePlayerTwo(match.getPointScorePlayerTwo() + 15);
-                if (match.getPointScorePlayerTwo() > 40) {
-                    match.setPointScorePlayerTwo(match.getPointScorePlayerTwo() * 0);
-                    match.setPointScorePlayerOne(match.getPointScorePlayerOne() * 0);
+                parseVariableMatch.setB(parseVariableMatch.getB() + 15);
+                if (parseVariableMatch.getB() > 40) {
+                    parseVariableMatch.setA(parseVariableMatch.getA() * 0);
+                    parseVariableMatch.setB(parseVariableMatch.getB() * 0);
                     match = calculateMatchScoreGames(match, score);
                 }
             }
         }
         return match;
     }
+
 
     private Match calculateMatchScoreGames(Match match, String score) {
         if (score.equals("ScoreOne")) {
@@ -85,35 +109,99 @@ public class MatchScoreCalculationService {
         return match;
     }
 
-    private Match checkAdvantage(Match match, String score) {
-        if (match.getPointScorePlayerOne() == match.getPointScorePlayerTwo() && match.getPointScorePlayerOne() == 40 && match.getPointScorePlayerTwo() == 40) {
-            match = Advantage(match, score);
+
+    private Match advantage(Match match, String score) {
+
+        if (match.getPointScorePlayerOne() == match.getPointScorePlayerTwo() && match.getPointScorePlayerOne().equals("AD") && match.getPointScorePlayerTwo().equals("AD")) {
+
+            if (score.equals("ScoreOne")) {
+                match = calculateMatchScoreGames(match, score);
+
+                match.setPointScorePlayerOne("0");
+                match.setPointScorePlayerTwo("0");
+                match.setAdvantage(false);
+
+            } else if (score.equals("ScoreTwo")) {
+                match = calculateMatchScoreGames(match, score);
+
+                match.setPointScorePlayerOne("0");
+                match.setPointScorePlayerTwo("0");
+                match.setAdvantage(false);
+            }
+
+        } else if (checkingTheConditionAdvantage(match, score)) {
+            if (score.equals("ScoreOne")) {
+                match.setPointScorePlayerOne("AD");
+                parseVariableMatch.setA(parseVariableMatch.getA() * 0);
+            } else if (score.equals("ScoreTwo")) {
+                match.setPointScorePlayerTwo("AD");
+                parseVariableMatch.setB(parseVariableMatch.getB() * 0);
+
+            }
+
+        } else {
+            if (score.equals("ScoreOne")) {
+                match.setPointScorePlayerOne("0");
+                match.setPointScorePlayerTwo("0");
+                parseVariableMatch.setA(parseVariableMatch.getA() * 0);
+                parseVariableMatch.setB(parseVariableMatch.getB() * 0);
+                match = calculateMatchScoreGames(match, score);
+                match.setAdvantage(false);
+
+
+            } else if (score.equals("ScoreTwo")) {
+                match.setPointScorePlayerOne("0");
+                match.setPointScorePlayerTwo("0");
+                parseVariableMatch.setA(parseVariableMatch.getA() * 0);
+                parseVariableMatch.setB(parseVariableMatch.getB() * 0);
+                match = calculateMatchScoreGames(match, score);
+                match.setAdvantage(false);
+
+
+            }
+        }
+
+        return match;
+    }
+
+
+    private Match calculateSetTiedAtFive(Match match) {
+
+        if (match.getGamesScorePlayerOne() == 6 && match.getGamesScorePlayerTwo() == 6) {
+            match.setSetTiedAtFive(false);
+            match.setTieBreak(true);
+        }
+
+        return match;
+    }
+
+
+    private Match MatchScoreGamesTieBreak(Match match, String score) {
+
+        if(parseVariableMatch.getA()-2==parseVariableMatch.getB() || parseVariableMatch.getB()-2==parseVariableMatch.getA()){
+            parseVariableMatch.setA(parseVariableMatch.getA() * 0);
+            parseVariableMatch.setB(parseVariableMatch.getB() * 0);
+            match.setPointScorePlayerOne("0");
+            match.setPointScorePlayerTwo("0");
+            match = calculateMatchScoreSet(match, score);
+            match.setTieBreak(false);
+        }else {
+            match = calculateMatchScoreGamesTieBreak(match, score);
         }
         return match;
     }
 
-    private Match Advantage(Match match, String score) {
+    private Match calculateMatchScoreGamesTieBreak(Match match, String score){
         if (score.equals("ScoreOne")) {
-            match.setPointScorePlayerOne(Integer.parseInt(null + "AD"));
-        } else if (score.equals("ScoreTwo")) {
-            match.setPointScorePlayerTwo(Integer.parseInt(null + "AD"));
+            parseVariableMatch.setA(parseVariableMatch.getA() + 1);
         }
-        return match;
-    }
-
-
-    private Match calculateMatchScoreGamesTimeBreak(Match match, String score) {
-
-        if (match.getGamesScorePlayerOne() == 7) {
-            match = calculateMatchScoreSet(match, score);
-            match.setTimeBreak(false);
-        } else if (match.getGamesScorePlayerTwo() == 7) {
-            match = calculateMatchScoreSet(match, score);
-            match.setTimeBreak(false);
+        else if (score.equals("ScoreTwo")) {
+            parseVariableMatch.setB(parseVariableMatch.getB() + 1);
         }
 
         return match;
     }
+
 
     private Match calculateMatchScoreSet(Match match, String score) {
 
@@ -132,6 +220,7 @@ public class MatchScoreCalculationService {
         return match;
     }
 
+
     private boolean checkingTheWinningMatch(Match match) {
 
         if (match.getSetScorePlayerOne() == 2) {
@@ -146,6 +235,21 @@ public class MatchScoreCalculationService {
         }
 
         return match.isGameOver();
+    }
+
+    private boolean checkingTheConditionAdvantage(Match match, String score) {
+        if (score.equals("ScoreOne")) {
+            if (match.getPointScorePlayerOne().equals("AD")) {
+                return false;
+            }
+
+        } else if (score.equals("ScoreTwo")) {
+            if (match.getPointScorePlayerTwo().equals("AD")) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

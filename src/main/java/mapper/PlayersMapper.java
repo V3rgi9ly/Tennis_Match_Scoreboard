@@ -19,9 +19,7 @@ public interface PlayersMapper {
     PlayersDTO players(Players players);
     Match match(MatchDTO matchDTO);
     MatchDTO matchDTO(Match match);
-    List<Match> matchList(List<Players> players);
-    List<Match> mathes(List<Matches> matches);
-    List<MathesDTO> mathesDTO(List<Match> matches);
+
    List<MathesDTO> matchesList(List<Matches> matches);
 
 

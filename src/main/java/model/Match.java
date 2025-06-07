@@ -13,22 +13,24 @@ public class Match {
 //    private int idPlayerOne, idPlayerTwo;
     private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
-    private int pointScorePlayerOne, pointScorePlayerTwo;
-    private boolean timeBreak=false;
+    private String pointScorePlayerOne, pointScorePlayerTwo;
+    private boolean tieBreak =false;
+    private boolean setTiedAtFive=false;
     private boolean gameOver=false;
+    private boolean advantage=false;
     private Players winner;
 
-    public int getPointScorePlayerTwo() {return pointScorePlayerTwo;}
+    public String getPointScorePlayerTwo() {return pointScorePlayerTwo;}
 
-    public void setPointScorePlayerTwo(int pointScorePlayerTwo) {
+    public void setPointScorePlayerTwo(String pointScorePlayerTwo) {
         this.pointScorePlayerTwo = pointScorePlayerTwo;
     }
 
-    public int getPointScorePlayerOne() {
+    public String getPointScorePlayerOne() {
         return pointScorePlayerOne;
     }
 
-    public void setPointScorePlayerOne(int pointScorePlayerOne) {
+    public void setPointScorePlayerOne(String pointScorePlayerOne) {
         this.pointScorePlayerOne = pointScorePlayerOne;
     }
 
@@ -89,12 +91,12 @@ public class Match {
         this.gameOver = gameOver;
     }
 
-    public boolean isTimeBreak() {
-        return timeBreak;
+    public boolean isTieBreak() {
+        return tieBreak;
     }
 
-    public void setTimeBreak(boolean timeBreak) {
-        this.timeBreak = timeBreak;
+    public void setTieBreak(boolean tieBreak) {
+        this.tieBreak = tieBreak;
     }
 
     public Players getWinner() {
@@ -105,7 +107,23 @@ public class Match {
         this.winner = winner;
     }
 
-    public Match(Players player1, Players player2, int setScorePlayerOne, int setScorePlayerTwo, int gamesScorePlayerOne, int gamesScorePlayerTwo, int pointScorePlayerOne, int pointScorePlayerTwo) {
+    public boolean isAdvantage() {
+        return advantage;
+    }
+
+    public void setAdvantage(boolean advantage) {
+        this.advantage = advantage;
+    }
+
+    public boolean isSetTiedAtFive() {
+        return setTiedAtFive;
+    }
+
+    public void setSetTiedAtFive(boolean setTiedAtFive) {
+        this.setTiedAtFive = setTiedAtFive;
+    }
+
+    public Match(Players player1, Players player2, int setScorePlayerOne, int setScorePlayerTwo, int gamesScorePlayerOne, int gamesScorePlayerTwo, String pointScorePlayerOne, String pointScorePlayerTwo) {
         this.player1 = player1;
         this.player2 = player2;
         this.setScorePlayerOne = setScorePlayerOne;

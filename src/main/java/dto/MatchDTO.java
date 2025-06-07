@@ -12,8 +12,9 @@ public class MatchDTO {
     private Players player1, player2;
     private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
-    private int pointScorePlayerOne, pointScorePlayerTwo;
-    private boolean timeBreak=false;
+    private String pointScorePlayerOne, pointScorePlayerTwo;
+    private boolean tieBreak =false;
+    private boolean setTiedAtFive=false;
     private boolean gameOver=false;
     private Players winner;
 
@@ -66,30 +67,30 @@ public class MatchDTO {
         this.gamesScorePlayerTwo = gamesScorePlayerTwo;
     }
 
-    public int getPointScorePlayerOne() {
+    public String getPointScorePlayerOne() {
         return pointScorePlayerOne;
     }
 
-    public void setPointScorePlayerOne(int pointScorePlayerOne) {
+    public void setPointScorePlayerOne(String pointScorePlayerOne) {
         this.pointScorePlayerOne = pointScorePlayerOne;
     }
 
-    public int getPointScorePlayerTwo() {
+    public String getPointScorePlayerTwo() {
         return pointScorePlayerTwo;
     }
 
-    public void setPointScorePlayerTwo(int pointScorePlayerTwo) {
+    public void setPointScorePlayerTwo(String pointScorePlayerTwo) {
         this.pointScorePlayerTwo = pointScorePlayerTwo;
     }
 
 
 
-    public boolean isTimeBreak() {
-        return timeBreak;
+    public boolean isTieBreak() {
+        return tieBreak;
     }
 
-    public void setTimeBreak(boolean timeBreak) {
-        this.timeBreak = timeBreak;
+    public void setTieBreak(boolean tieBreak) {
+        this.tieBreak = tieBreak;
     }
 
     public boolean isGameOver() {
@@ -106,5 +107,13 @@ public class MatchDTO {
 
     public void setWinner(Players winner) {
         this.winner = winner;
+    }
+
+    public boolean isSetTiedAtFive() {
+        return setTiedAtFive;
+    }
+
+    public void setSetTiedAtFive(boolean setTiedAtFive) {
+        this.setTiedAtFive = setTiedAtFive;
     }
 }
