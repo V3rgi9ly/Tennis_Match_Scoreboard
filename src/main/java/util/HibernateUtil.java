@@ -10,24 +10,34 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
 
-    private static HibernateUtil instance;
+    private static HibernateUtil instance=new HibernateUtil();
+    private final SessionFactory sessionFactory;
     private HibernateUtil() {
-
+            this.sessionFactory=configurationHibernate();
     }
 
     public static HibernateUtil getInstance() {
-        if (instance == null) {
-            instance = new HibernateUtil();
-        }
         return instance;
     }
 
-    public SessionFactory configurationHibernate() {
-        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-        Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(Players.class).addAnnotatedClass(Matches.class).getMetadataBuilder().build();
-        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
+    public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
+    private SessionFactory configurationHibernate() {
+        try {
+            StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+            Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(Players.class).addAnnotatedClass(Matches.class).getMetadataBuilder().build();
+            return  metadata.getSessionFactoryBuilder().build();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void shutdown() {
+        if (sessionFactory != null && !sessionFactory.isClosed()) {
+            sessionFactory.close();
+        }
+    }
 
 }

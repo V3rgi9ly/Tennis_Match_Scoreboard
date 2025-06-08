@@ -13,8 +13,8 @@ public class MathesRepository {
     HibernateUtil configHibernate = HibernateUtil.getInstance();
 
     public void save(Match values) {
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
-        try {
+
+        try (Session session = configHibernate.getSessionFactory().openSession()){
             session.beginTransaction();
             Matches matches = new Matches();
             matches.setPlayer1(values.getPlayersOne());
@@ -24,17 +24,13 @@ public class MathesRepository {
             session.save(matches);
             session.getTransaction().commit();
 
-        } finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
         }
     }
 
     public List<Matches> findAll(String val1) {
 
         List<Matches> matches = new ArrayList<>();
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
-        try {
+        try (Session session = configHibernate.getSessionFactory().openSession()){
 
             session.beginTransaction();
             Query<Matches> query = session.createQuery("from Matches where player1.name=:val or player2.name=:val");
@@ -42,9 +38,6 @@ public class MathesRepository {
             matches = query.list();
             session.getTransaction().commit();
 
-        } finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
         }
         return matches;
     }
@@ -57,8 +50,7 @@ public class MathesRepository {
 
 
         List<Matches> matches = new ArrayList<>();
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
-        try {
+        try (Session session = configHibernate.getSessionFactory().openSession()){
 
             session.beginTransaction();
             Query<Matches> query = session.createQuery("from Matches ");
@@ -68,46 +60,35 @@ public class MathesRepository {
             matches = query.list();
             session.getTransaction().commit();
 
-        } finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
         }
         return matches;
     }
 
 
     public Long getCountInTable() {
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
 
         Long query;
 
-        try {
+        try (Session session = configHibernate.getSessionFactory().openSession()){
             session.beginTransaction();
             query = (Long)session.createQuery("select count(*) from Matches").getSingleResult();
 
 
             session.getTransaction().commit();
-        } finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
         }
         return query;
     }
 
     public Long getCountInTable(String val1) {
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
 
         Long query;
 
-        try {
+        try (Session session = configHibernate.getSessionFactory().openSession()){
             session.beginTransaction();
             query = (Long)session.createQuery("select count(*) from Matches where player1.name=:val1 or player2.name=:val1").setParameter("val1", val1).getSingleResult();
 
 
             session.getTransaction().commit();
-        } finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
         }
         return query;
     }

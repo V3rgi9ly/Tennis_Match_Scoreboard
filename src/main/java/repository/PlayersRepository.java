@@ -18,68 +18,55 @@ public class PlayersRepository {
 
 
     public void create(String name1){
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
-        try {
+
+        try(Session session = configHibernate.getSessionFactory().openSession()) {
             session.beginTransaction();
             Players playerOne = new Players(name1);
             session.save(playerOne);
             session.getTransaction().commit();
 
-        }finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
         }
     }
 
     public void create(String name1, String name2) {
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
 
-        try {
+
+        try (Session session = configHibernate.getSessionFactory().openSession()){
             session.beginTransaction();
             Players playerOne = new Players(name1);
             Players playerTwo = new Players(name2);
             session.save(playerOne);
             session.save(playerTwo);
             session.getTransaction().commit();
-        }finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
         }
     }
 
 
     public List<Players> findAll(String playerOne, String playerTwo) {
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
+
         List<Players> players=null;
 
-        try {
+        try (Session session = configHibernate.getSessionFactory().openSession()){
             session.beginTransaction();
           players=session.createQuery("from Players where name in (:playerOne, :playerTwo)").list();
             session.getTransaction().commit();
-        }
-        finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
         }
         return players;
     }
 
 
     public List<Players> find(String val) {
-        Session session = configHibernate.configurationHibernate().getCurrentSession();
+
         List<Players> players=new ArrayList<>();
 
-        try {
+        try(Session session = configHibernate.getSessionFactory().openSession()) {
             session.beginTransaction();
             Query<Players> query=session.createQuery("from Players where name=:val", Players.class);
             query.setParameter("val", val);
             players=query.list();
             session.getTransaction().commit();
         }
-        finally {
-            session.close();
-            configHibernate.configurationHibernate().close();
-        }
+
         return players;
     }
 
