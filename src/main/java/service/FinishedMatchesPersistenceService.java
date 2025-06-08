@@ -8,12 +8,10 @@ import util.ConfigurationRepository;
 
 public class FinishedMatchesPersistenceService {
 
-    private ConfigurationData config;
     private ConfigurationRepository repository=ConfigurationRepository.getInstance();
     private PlayersMapper playersMapper = PlayersMapper.INSTANCE;
 
-    public FinishedMatchesPersistenceService() {
-        config = ConfigurationData.getInstance();
+    public FinishedMatchesPersistenceService() {;
         repository.getMathesRepository();
     }
 

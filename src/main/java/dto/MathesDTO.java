@@ -4,7 +4,6 @@ package dto;
 import lombok.*;
 
 
-@NoArgsConstructor
 
 public class MathesDTO {
 
