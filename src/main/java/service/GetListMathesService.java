@@ -2,8 +2,6 @@ package service;
 
 import dto.MathesDTO;
 import mapper.PlayersMapper;
-import model.Match;
-import model.Matches;
 import util.ConfigurationRepository;
 
 import java.util.ArrayList;

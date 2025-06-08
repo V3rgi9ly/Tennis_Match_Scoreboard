@@ -13,8 +13,6 @@ public class MatchDTO {
     private int setScorePlayerOne, setScorePlayerTwo;
     private int gamesScorePlayerOne, gamesScorePlayerTwo;
     private String pointScorePlayerOne, pointScorePlayerTwo;
-    private boolean tieBreak =false;
-    private boolean setTiedAtFive=false;
     private boolean gameOver=false;
     private Players winner;
 
@@ -84,15 +82,6 @@ public class MatchDTO {
     }
 
 
-
-    public boolean isTieBreak() {
-        return tieBreak;
-    }
-
-    public void setTieBreak(boolean tieBreak) {
-        this.tieBreak = tieBreak;
-    }
-
     public boolean isGameOver() {
         return gameOver;
     }
@@ -109,11 +98,5 @@ public class MatchDTO {
         this.winner = winner;
     }
 
-    public boolean isSetTiedAtFive() {
-        return setTiedAtFive;
-    }
 
-    public void setSetTiedAtFive(boolean setTiedAtFive) {
-        this.setTiedAtFive = setTiedAtFive;
-    }
 }

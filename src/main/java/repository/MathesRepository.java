@@ -9,11 +9,9 @@ import util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MathesRepository implements InterfaceMathesRepository {
+public class MathesRepository {
     HibernateUtil configHibernate = HibernateUtil.getInstance();
-//    ConfigurationData configurationData=ConfigurationData.getInstance();
 
-    @Override
     public void save(Match values) {
         Session session = configHibernate.configurationHibernate().getCurrentSession();
         try {
@@ -54,7 +52,7 @@ public class MathesRepository implements InterfaceMathesRepository {
 
 
 
-    @Override
+
     public List<Matches> findAll(int val1, int val2) {
 
 
@@ -77,15 +75,6 @@ public class MathesRepository implements InterfaceMathesRepository {
         return matches;
     }
 
-    @Override
-    public List find(String val1) {
-        return List.of();
-    }
-
-    @Override
-    public void update() {
-
-    }
 
     public Long getCountInTable() {
         Session session = configHibernate.configurationHibernate().getCurrentSession();

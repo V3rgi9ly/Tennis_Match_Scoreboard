@@ -12,8 +12,6 @@ import java.util.*;
 public class MatchesService {
 
     ConfigurationRepository configurationRepository = ConfigurationRepository.getInstance();
-    //    private LocalRepository localRepository = new LocalRepository();
-    //    private PlayersRepository playersRepository=new PlayersRepository();
     private ConfigurationData configurationData = ConfigurationData.getInstance();
     private final PlayersMapper playersMapper = PlayersMapper.INSTANCE;
 

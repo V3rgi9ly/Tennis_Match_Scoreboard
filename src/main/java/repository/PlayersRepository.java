@@ -8,7 +8,7 @@ import util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayersRepository  implements InterfacePlayersRepository<Players>{
+public class PlayersRepository {
 
     HibernateUtil configHibernate;
 
@@ -31,7 +31,6 @@ public class PlayersRepository  implements InterfacePlayersRepository<Players>{
         }
     }
 
-    @Override
     public void create(String name1, String name2) {
         Session session = configHibernate.configurationHibernate().getCurrentSession();
 
@@ -48,7 +47,7 @@ public class PlayersRepository  implements InterfacePlayersRepository<Players>{
         }
     }
 
-    @Override
+
     public List<Players> findAll(String playerOne, String playerTwo) {
         Session session = configHibernate.configurationHibernate().getCurrentSession();
         List<Players> players=null;
@@ -65,7 +64,7 @@ public class PlayersRepository  implements InterfacePlayersRepository<Players>{
         return players;
     }
 
-    @Override
+
     public List<Players> find(String val) {
         Session session = configHibernate.configurationHibernate().getCurrentSession();
         List<Players> players=new ArrayList<>();
@@ -76,7 +75,6 @@ public class PlayersRepository  implements InterfacePlayersRepository<Players>{
             query.setParameter("val", val);
             players=query.list();
             session.getTransaction().commit();
-//            players=session.createQuery("from Players where name=:val").list();
         }
         finally {
             session.close();
@@ -85,8 +83,5 @@ public class PlayersRepository  implements InterfacePlayersRepository<Players>{
         return players;
     }
 
-    @Override
-    public void update() {
 
-    }
 }

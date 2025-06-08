@@ -34,15 +34,6 @@ public class PlayersService {
             }else if ((players3.size()==0 && players4.size()!=0)){
                 createPlayer(playerOne);
             }
-//            if (!players1.getName().equals(players.getName())) {
-//
-//            }
-
-
-//            if (!players2.getName().equals(players.getName())) {
-//                createPlayer(playerTwo);
-//            }
-
 
     }
 
@@ -51,9 +42,6 @@ public class PlayersService {
         configurationRepository.getPlayersRepository().create(name1);
     }
 
-//    private void createPlayers(String name1, String name2) {
-//        configurationRepository.getPlayersRepository().create(name1, name2);
-//    }
 
 
 }

@@ -9,14 +9,11 @@ import util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalRepository implements InterfaceLocalRepository<Match> {
+public class LocalRepository  {
 
 
     HibernateUtil configHibernate = HibernateUtil.getInstance();
-//    ConfigurationData configurationData = ConfigurationData.getInstance();
 
-
-    @Override
     public List<Players> create(String val1, String val2) {
         Session session = configHibernate.configurationHibernate().getCurrentSession();
         List<Players> players1 = new ArrayList<>();
@@ -38,18 +35,7 @@ public class LocalRepository implements InterfaceLocalRepository<Match> {
         return players1;
     }
 
-    @Override
-    public List<Match> findAll(Match val1, Match val2) {
-        return null;
-    }
 
-    @Override
-    public List<Match> find(String val1) {
-        return null;
-    }
 
-    @Override
-    public void update() {
 
-    }
 }
