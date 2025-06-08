@@ -67,7 +67,7 @@ public class ServletMatchScore extends HttpServlet {
 
             if (matchDTO.isGameOver() == true) {
                 finishedMatchesPersistenceService.saveMatch(matchDTO);
-                resp.sendRedirect("/result-match" + "?uuid=" + uuid);
+                resp.sendRedirect(req.getContextPath()+"/result-match?uuid=" + uuid);
 
             } else {
                 req.setAttribute("playerOne", matchDTO.getPlayer1().getName());
