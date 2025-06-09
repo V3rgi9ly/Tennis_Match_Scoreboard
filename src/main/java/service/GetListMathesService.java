@@ -21,6 +21,11 @@ public class GetListMathesService {
         return mathesDTOS;
     }
 
+    public List<MathesDTO> getListMathes(String name, int page) {
+        List<MathesDTO> mathesDTOS=playersMapper.matchesList(repository.getMathesRepository().findAll(name,(page*5)-5, 5));
+        return mathesDTOS;
+    }
+
 
     public List<Integer> getListPages(){
         Long page=repository.getMathesRepository().getCountInTable();

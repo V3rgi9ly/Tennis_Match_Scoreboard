@@ -26,8 +26,8 @@ public class ServletGetMathes extends HttpServlet {
         List<Integer> pages;
 
         try {
-            if ((name != null && !name.equals("")) || (name != null && !name.equals("") && a==1)  ) {
-                mathesDTO = searchService.searchMathesByName(name);
+            if ((name != null && !name.equals("")) || (name != null && !name.equals("") && a>=1)  ) {
+                mathesDTO = service.getListMathes(name, a);
                 pages = service.getListPages(name);
             } else {
                 mathesDTO = service.getListMathes(a);

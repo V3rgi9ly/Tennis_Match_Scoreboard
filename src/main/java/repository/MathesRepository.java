@@ -64,6 +64,24 @@ public class MathesRepository {
         return matches;
     }
 
+    public List<Matches> findAll(String name, int val1, int val2) {
+
+
+        List<Matches> matches = new ArrayList<>();
+        try (Session session = configHibernate.getSessionFactory().openSession()){
+
+            session.beginTransaction();
+            Query<Matches> query = session.createQuery("from Matches where player1.name=:name or player2.name=:name").setParameter("name", name);
+            query.setFirstResult(val1);
+            query.setMaxResults(val2);
+
+            matches = query.list();
+            session.getTransaction().commit();
+
+        }
+        return matches;
+    }
+
 
     public Long getCountInTable() {
 

@@ -5,6 +5,7 @@ import mapper.PlayersMapper;
 import model.Matches;
 import util.ConfigurationRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchMathesByNameService {
@@ -16,8 +17,7 @@ public class SearchMathesByNameService {
         configurationRepository.getMathesRepository();
     }
 
-    public List<MathesDTO> searchMathesByName(String name){
-
+    public List<MathesDTO> searchMathesByName(String name, int page){
         List<Matches> matches=configurationRepository.getMathesRepository().findAll(name);
         return playersMapper.matchesList(matches);
     }
