@@ -45,11 +45,11 @@ public class MatchScoreCalculationService {
             match = calculateMatchScorePoint(match, score);
             match = parseVariableMatch.parsePointScore(match);
             match.setSetTiedAtFive(true);
-            match = calculateSetTiedAtFive(match);
+            match = calculateSetTiedAtFive(match, score);
         } else if (match.isSetTiedAtFive() == true) {
             match = calculateMatchScorePoint(match, score);
             match = parseVariableMatch.parsePointScore(match);
-            match = calculateSetTiedAtFive(match);
+            match = calculateSetTiedAtFive(match, score);
 
         } else if (match.isTieBreak()==true) {
             match=MatchScoreGamesTieBreak(match, score);
@@ -165,11 +165,17 @@ public class MatchScoreCalculationService {
     }
 
 
-    private Match calculateSetTiedAtFive(Match match) {
+    private Match calculateSetTiedAtFive(Match match, String score) {
 
         if (match.getGamesScorePlayerOne() == 6 && match.getGamesScorePlayerTwo() == 6) {
             match.setSetTiedAtFive(false);
             match.setTieBreak(true);
+        }else if (match.getGamesScorePlayerOne()-2==match.getGamesScorePlayerTwo()) {
+            match.setSetTiedAtFive(false);
+            match = calculateMatchScoreSet(match, score);
+        } else if (match.getGamesScorePlayerTwo()-2==match.getGamesScorePlayerOne()) {
+            match.setSetTiedAtFive(false);
+            match = calculateMatchScoreSet(match, score);
         }
 
         return match;
