@@ -27,23 +27,6 @@ public class MathesRepository {
         }
     }
 
-    public List<Matches> findAll(String val1) {
-
-        List<Matches> matches = new ArrayList<>();
-        try (Session session = configHibernate.getSessionFactory().openSession()){
-
-            session.beginTransaction();
-            Query<Matches> query = session.createQuery("from Matches where player1.name=:val or player2.name=:val");
-            query.setParameter("val", val1);
-            matches = query.list();
-            session.getTransaction().commit();
-
-        }
-        return matches;
-    }
-
-
-
 
 
     public List<Matches> findAll(int val1, int val2) {

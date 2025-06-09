@@ -7,14 +7,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.GetListMathesService;
-import service.SearchMathesByNameService;
+
 import java.util.List;
 
 @WebServlet("/matches")
 public class ServletGetMathes extends HttpServlet {
 
     private GetListMathesService service = new GetListMathesService();
-    private SearchMathesByNameService searchService = new SearchMathesByNameService();
+//    private SearchMathesByNameService searchService = new SearchMathesByNameService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
