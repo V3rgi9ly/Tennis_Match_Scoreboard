@@ -10,6 +10,19 @@
 - **Database**: Hibernate, H2 (in-memory SQL database)
 - **Tests**: JUnit5
 
+## Project motivation
+* Create a client-server application with a web interface
+* Gain practical experience with the Hibernate ORM
+* Build a simple web interface without third-party libraries
+* Get familiar with the MVC(S) architectural pattern
+
+
+## Application functionality
+#### Working with matches :
+* Create a new match
+* View completed matches, search matches by player names
+* Calculate scores in the current match
+
 ## Pages info
 
 ### Main
@@ -44,3 +57,72 @@ The result of the current completed match is displayed.
 ![DiagramDB](https://s01.pic4net.com/di-JP3E4K.png)
 
 This diagram represents the structure of the `MATCHES`, `PLAYERS` and their relationships.
+
+
+## Database
+
+#### Table `Players`
+| Колонка    | Тип     | Комментарий                 |
+|------------|---------|-----------------------------|
+| `ID`       | int     | auto-increment, primary key |
+| `Name`     | varchar | Player name                 |
+
+
+#### Table `Matches`
+| Колонка   | Тип     | Комментарий |
+|-----------|---------|-------------|
+| `ID`      | int     | User ID, auto-increment, primary key |
+| `Player1` | int | First player ID, external key to Players.ID|
+| `Player2` | int | Second player ID, external key to Players.ID|
+| `Winner`  | int | Winner ID, external key to Players.ID|
+
+
+## MVCS 
+I used the MVCS (Model-View-Controller-Service) architectural design pattern. It's an extension of the classic MVC pattern and further separates the logic for interacting with the database or network into a separate component—the "Service." This allows for even better isolation of different parts of the application, improving their maintainability and testability.
+![MVCS ](https://s01.pic4net.com/di-H9SDG7.png)
+
+## Tests
+For testing I used JUnit5
+
+#### Example Test
+```
+public class MatchScoreCalculationServiceTest {
+
+    private MatchScoreCalculationService matchScoreCalculationService;
+    ParseVariableMatch parseVariableMatch= Mockito.mock(ParseVariableMatch.class);
+
+    @BeforeEach
+    public void setUp() {
+        matchScoreCalculationService = new MatchScoreCalculationService();
+    }
+
+
+    @Test
+    @DisplayName("Test winner game parties")
+    public void testWinnerGameParties() {
+        Match match = new Match(new Players("Sergey"), new Players("Andrey"), 0, 0, 0, 0, "40", "0");
+        ParseVariableMatch parseVariableMatch= Mockito.spy(ParseVariableMatch.class);
+        parseVariableMatch.setA(40);
+        MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService(parseVariableMatch);
+
+        match = matchScoreCalculationService.collectingPointInMatch(match, "ScoreOne");
+        int totalGame=match.getGamesScorePlayerOne();
+        assertEquals(1, totalGame);
+
+    }
+
+    @Test
+    @DisplayName("Test advantage")
+    public void testAdvantage(){
+        Match match = new Match(new Players("Sergey"), new Players("Andrey"), 0, 0, 0, 0, "40", "40");
+        ParseVariableMatch parseVariableMatch= Mockito.spy(ParseVariableMatch.class);
+        parseVariableMatch.setA(40);
+        parseVariableMatch.setB(40);
+        MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService(parseVariableMatch);
+
+        match = matchScoreCalculationService.collectingPointInMatch(match, "ScoreOne");
+        boolean advantage=match.isAdvantage();
+        assertEquals(true, advantage);
+
+    }
+```
